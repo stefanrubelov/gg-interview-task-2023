@@ -1,6 +1,8 @@
 <?php
 
-use App\Livewire\VideosIndex;
+use App\Livewire\Videos\AllVideos;
+use App\Livewire\Videos\JoinVideos;
+use App\Livewire\Videos\TranscodeVideos;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +17,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Route::view('/', 'welcome')->name('home');
-Route::get('/', VideosIndex::class);
+Route::get('/', function () {
+    return redirect()->route('videos.index');
+});
+
+Route::group(['prefix' => 'videos'], function () {
+    Route::get('/', AllVideos::class)->name('videos.index');
+    Route::get('/join', JoinVideos::class)->name('videos.join');
+    Route::get('/transcode', TranscodeVideos::class)->name('videos.transcode');
+});
