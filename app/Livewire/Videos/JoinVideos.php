@@ -5,6 +5,7 @@ namespace App\Livewire\Videos;
 use PDO;
 use FFMpeg\FFMpeg;
 use Livewire\Component;
+use FFMpeg\Format\Video\X264;
 use App\Services\VideoService;
 use Illuminate\Support\Facades\Storage;
 
@@ -25,10 +26,18 @@ class JoinVideos extends Component
     {
         $ffmpeg = FFMpeg::create();
         $video = $ffmpeg->open($this->selectedVideos[0]);
-        array_shift($this->selectedVideos);
+
+        $format = new X264();
+        $format
+            ->setVideoCodec('libx264')
+            ->setKiloBitrate(736)
+            ->setAudioKiloBitrate(256)
+            ->setAudioChannels(2);
 
         $video
             ->concat($this->selectedVideos)
-            ->saveFromSameCodecs('storage/videos/video_' . time() . '.mp4', true);
+            ->saveFromDifferentCodecs($format, 'storage/videos/video_' . time() . '.mp4');
+
+        $this->selectedVideos = [];
     }
 }
