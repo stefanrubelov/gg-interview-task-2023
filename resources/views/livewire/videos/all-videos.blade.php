@@ -4,7 +4,7 @@
             <ul
                 class="w-full p-4 mx-auto mt-10 space-y-2 border border-gray-300 divide-y divide-gray-300">
                 @foreach ($videos as $video)
-                    <li x-data="{ showVideo: false }" class="flex items-center justify-center text-lg">
+                    <li x-data="{ showVideo: false }" class="flex flex-col items-start justify-center w-full text-lg">
                         <p @click="showVideo = !showVideo" @click.away="showVideo = false" class="cursor-pointer hover:opacity-75">
                             Video name:  {{ basename($video) }}
                         </p>

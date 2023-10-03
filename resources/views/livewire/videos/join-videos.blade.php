@@ -9,7 +9,7 @@
             <ul class="w-full p-4 mt-10 space-y-2 border border-gray-300 divide-y divide-gray-300">
                 @foreach ($videos as $video)
                     <li x-data="{ showVideo: false }" class="flex flex-col items-center justify-center text-lg" wire:key="{{rand()}}">
-                        <div class="flex flex-row items-center">
+                        <div class="flex flex-row items-center justify-start w-full">
                             <input type="checkbox" name="" id="" wire:model.live="selectedVideos"
                                 value="{{ 'storage/videos/' . basename($video) }}" class="mr-2">
                             <p @click="showVideo = !showVideo" @click.away="showVideo = false"
